@@ -30,9 +30,6 @@ describe('OrderForm', () => {
     userEvent.click(quesoChoice)
     userEvent.click(submitButton)
     
-    
-    // getOrders.mockResolvedValueOnce([...sampleApiData.orders, {name: 'Isaac', ingredients:['beans', 'queso fresco'], id:4}])
-
     const isaacOrder = await waitFor(() => screen.getByText('Isaac'))
 
     expect(isaacOrder).toBeInTheDocument()
