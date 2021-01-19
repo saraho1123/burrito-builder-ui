@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {getOrders} from '../../apiCalls';
+import { getOrders, postOrder } from '../../apiCalls';
 import Orders from '../../components/Orders/Orders';
 import OrderForm from '../../components/OrderForm/OrderForm';
 
@@ -14,11 +14,17 @@ class App extends Component {
 
   componentDidMount() {
     getOrders()
+      .then(data => this.setState({ orders: [...this.state.orders, ...data.orders]}))
       .catch(err => console.error('Error fetching:', err));
   }
 
   addOrder = (orderInfo) => {
-    this.setState({orders: [...this.state.orders, orderInfo]})
+    postOrder(orderInfo)
+      .then(() => getOrders()
+        .then(data => this.setState({ orders: [...data.orders]}))
+        .catch(err => console.error('Error fetching:', err))
+      )
+      .catch(error => console.log(error))
   }
 
   render() {
@@ -29,7 +35,7 @@ class App extends Component {
           <OrderForm addOrder={this.addOrder}/>
         </header>
 
-        <Orders orders={this.state.orders} addOrder={this.addOrder}/>
+        <Orders orders={this.state.orders}/>
       </main>
     );
   }
