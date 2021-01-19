@@ -34,6 +34,58 @@ export const sampleApiData = {
         "queso fresco"
       ]
     },
+    // {
+    //   "name": "Isaac",
+    //   "ingredients": [
+    //   "beans",
+    //   "queso fresco"
+    //   ],
+    //   "id": 13
+    //   },
+  ]
+}
+
+export const samplePostData =  {
+  'name': 'Isaac',
+  'ingredients': ['beans', 'queso fresco']
+}
+
+export const updatedSampleApiData = {
+  "orders": [
+    {
+      "id": 1,
+      "name": "Pat",
+      "ingredients": [
+        "beans",
+        "lettuce",
+        "carnitas",
+        "queso fresco",
+        "jalapeno"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Sam",
+      "ingredients": [
+        "steak",
+        "pico de gallo",
+        "lettuce",
+        "carnitas",
+        "queso fresco",
+        "jalapeno"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Alex",
+      "ingredients": [
+        "sofritas",
+        "beans",
+        "sour cream",
+        "carnitas",
+        "queso fresco"
+      ]
+    },
     {
       "name": "Isaac",
       "ingredients": [
@@ -43,9 +95,4 @@ export const sampleApiData = {
       "id": 13
       },
   ]
-}
-
-export const samplePostData =  {
-  'name': 'Isaac',
-  'ingredients': ['beans', 'queso fresco']
 }

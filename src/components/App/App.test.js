@@ -4,14 +4,15 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { getOrders, postOrder } from '../../apiCalls';
-import { sampleApiData, samplePostData } from '../../sampleApiData'
+import { sampleApiData, samplePostData, updatedSampleApiData } from '../../sampleApiData'
 jest.mock('../../apiCalls')
 
 
 describe('OrderForm', () => {
   it('should add a new order when inputs are completed and submit button is clicked', async () => {
-    getOrders.mockResolvedValue(sampleApiData)
+    getOrders.mockResolvedValueOnce(sampleApiData)
     postOrder.mockResolvedValueOnce(samplePostData)
+    getOrders.mockResolvedValueOnce(updatedSampleApiData)
     render(<App/>)
     const addOrder = jest.fn(samplePostData)
     // addOrder.mockResolvedValueOnce()
@@ -28,6 +29,9 @@ describe('OrderForm', () => {
     userEvent.click(beanChoice)
     userEvent.click(quesoChoice)
     userEvent.click(submitButton)
+    
+    
+    // getOrders.mockResolvedValueOnce([...sampleApiData.orders, {name: 'Isaac', ingredients:['beans', 'queso fresco'], id:4}])
 
     const isaacOrder = await waitFor(() => screen.getByText('Isaac'))
 
