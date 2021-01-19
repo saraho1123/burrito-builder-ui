@@ -2,17 +2,33 @@ import React, { Component } from 'react';
 
 class OrderForm extends Component {
   constructor(props) {
-    super();
-    this.props = props;
+    super(props);
+    // this.props = props;
     this.state = {
       name: '',
       ingredients: []
     };
   }
 
+  handleNameChange = e => {
+    this.setState({ name: e.target.value })
+  }
+
+  handleIngredientChange = e => {
+    e.preventDefault()
+    let ingredient = e.target.name
+    this.setState({ingredients: [...this.state.ingredients, ingredient]})
+  }
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.props)
+    const newOrder = {
+      id: Date.now(),
+      name: this.state.name,
+      ingredients: this.state.ingredients,
+    }
+    this.props.addOrder(newOrder)
     this.clearInputs();
   }
 
